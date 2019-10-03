@@ -21,20 +21,8 @@ catchall 0-1023 minus above ports
 
 All times are w.r.t packet capture start time
 
-#FTP packets time
-tshark -r maccdc2012_00003.pcap "tcp.dstport=20 or tcp.dstport=21 or udp.dstport=20 or udp.dstport=21" | awk {'print $2'}
+#protocol packets time
+#for each protocol each port do
+tshark -r maccdc2012_00003.pcap "tcp.dstport=protocol_port or udp.dstport=protocol_port" | awk {'print $2'} > protocol_name.txt
 
-#ssh packets time
-tshark -r maccdc2012_00003.pcap "tcp.dstport==22 or udp.dstport==22" | awk {'print $2'}
-
-#telnet packets time
-tshark -r maccdc2012_00003.pcap "tcp.dstport==23 or udp.dstport==23" | awk {'print $2'}
-
-#smtp packets time
-tshark -r maccdc2012_00003.pcap "tcp.dstport==25" | awk {'print $2'}
-
-#dns packets time
-tshark -r maccdc2012_00003.pcap "tcp.dstport==53" | awk {'print $2'}
-
-#dhcp packets time
-tshark -r maccdc2012_00003.pcap "tcp.dstport==67 or tcp.dst" | awk {'print $2'}
+This files will be used by python code to generate graph.
