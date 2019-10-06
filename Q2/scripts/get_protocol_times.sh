@@ -21,13 +21,18 @@ ports=(
 )
 
 path="../data/times/"
+catch_all_filter="((tcp.dstport >= 0 and tcp.dstport < 1024) or (udp.dstport >= 0 and udp.dstport < 1024)) "
 mkdir -p $path
 for protocol in "${!ports[@]}"; do 
 	file="$protocol.txt"
 	times=
 	for port in ${ports[$protocol]}; do
-		temp=$(tshark -r ../../maccdc2012_00003.pcap "tcp.dstport==$port or udp.dstport==$port" | awk {'print $2'})
-		times="$times $temp"
+		#temp=$(tshark -r ../../maccdc2012_00003.pcap "tcp.dstport==$port or udp.dstport==$port" | awk {'print $2'})
+		#times="$times $temp"
+		catch_all_filter="$catch_all_filter and not tcp.dstport==$port and not udp.dstport==$port"
 	done
-	echo $(echo $times | tr " " "\n" | sort -g) > "$path$file"
+	#echo $(echo $times | tr " " "\n" | sort -g) > "$path$file"
 done
+
+echo $catch_all_filter
+tshark -r ../../maccdc2012_00003.pcap "$catch_all_filter" | awk {'print $2'} > $path"catch_all.txt"

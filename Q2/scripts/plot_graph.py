@@ -1,5 +1,6 @@
 import os
 import matplotlib.pyplot as plt
+plt.figure(figsize=(8,7))
 
 path="../data/times/"
 for f in os.listdir(path):
@@ -22,9 +23,7 @@ for f in os.listdir(path):
 
     plt.plot(xtimes, freq, label=protocol)
 
-plt.xlabel('intervals')
+plt.xlabel('Time(s)')
 plt.ylabel('Freqency')
-plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.05),
-          ncol=5, fancybox=True, shadow=True)
-plt.show()
-plt.savefig('freq_graph.png')
+plt.legend()
+plt.savefig('../data/freq_graph.png')
