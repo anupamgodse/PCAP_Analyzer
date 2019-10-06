@@ -21,8 +21,8 @@ catchall 0-1023 minus above ports
 
 All times are w.r.t packet capture start time
 
-#protocol packets time
-#for each protocol each port do
-tshark -r maccdc2012_00003.pcap "tcp.dstport=protocol_port or udp.dstport=protocol_port" | awk {'print $2'} > protocol_name.txt
+#protocol packets time #for each protocol each port do tshark -r
+maccdc2012_00003.pcap "tcp.dstport=protocol_port or udp.dstport=protocol_port" |
+awk {'print $2'} > protocol_name.txt
 
 This files will be used by python code to generate graph.

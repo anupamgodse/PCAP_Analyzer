@@ -13,5 +13,13 @@ if __name__ == "__main__":
     for line in fr:
         conn = line.split()
         if (len(conn) == 2):
-            fw.write("\"" + conn[0] + "\" -- \"" + conn[1] + "\";\n")
+            #identiy ICMP transactions
+            icmp1 = conn[0].split(',')
+            if len(icmp1) == 2:
+                icmp2 = conn[1].split(',')
+                fw.write("\"" + icmp1[0] + "\" -- \"" + icmp1[1] + "\";\n")
+                fw.write("\"" + icmp2[0] + "\" -- \"" + icmp2[1] + "\";\n")
+            else:
+                fw.write("\"" + conn[0] + "\" -- \"" + conn[1] + "\";\n")
+
     fw.write("}")

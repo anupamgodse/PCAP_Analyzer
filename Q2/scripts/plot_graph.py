@@ -4,7 +4,6 @@ plt.figure(figsize=(8,7))
 
 path="../data/times/"
 for f in os.listdir(path):
-    print(f)
     protocol = f.split('.')[0] 
     times = []
     with open(path+f) as fl:
